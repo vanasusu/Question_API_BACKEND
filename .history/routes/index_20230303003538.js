@@ -30,7 +30,7 @@ router.get("/search", auth, async (req, res) => {
      questions= questions.filter(question=>question.subject==filters.subject)
     }
     if(filters.question) {
-      questions= questions.filter(question=>question.question==filters.question)
+      questions= questions.filter(question=>question.question==filters.subject)
      }
     return res.status(200).json({ questions })
   } catch (error) {
