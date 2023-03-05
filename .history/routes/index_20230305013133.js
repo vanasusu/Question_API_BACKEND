@@ -3,6 +3,7 @@ var router = express.Router();
 var auth = require("../middleware/auth");
 const Question = require("../schema/question");
 const { check, validationResult } = require("express-validator/check");
+const question = require("../schema/question");
 
 router.get("/all", auth, async (req, res) => {
   try {
@@ -17,7 +18,7 @@ router.get("/search", auth, async (req, res) => {
   try {
     const filters = req.query;
 
-   var questions = await Question.find({}).populate('user')
+   var questions = await Question.find({})
     if (filters.level) {
      questions= questions.filter(question=>question.level==filters.level)
     //  console.log(questions,filters)
