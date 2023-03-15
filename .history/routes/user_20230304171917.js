@@ -3,7 +3,7 @@ const {check,validationResult}=require("express-validator/check")
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
-
+const 
 const User = require("../schema/user");
 
 router.post(
@@ -17,7 +17,6 @@ router.post(
     check("role", "Please enter a valid role").isIn(['Tutor', 'Teacher', 'Student']),
   ],
   async (req, res) => {
-    console.log(req)
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({
@@ -32,7 +31,7 @@ router.post(
       });
       if (user) {
         return res.status(400).json({
-          message: "User Already Exists",
+          msg: "User Already Exists",
         });
       }
 
@@ -50,17 +49,18 @@ router.post(
       const payload = {
         user: {
           id: user.id,
-          role:role
         },
       };
 
       jwt.sign(
         payload,
-        process.env.JWTCODE,
+        process.env.JWTCODE, {
+            expiresIn: 10000
+        },
         (err, token) => {
           if (err) throw err;
           res.status(200).json({
-            token,username,role,id:user.id
+            token,
           });
         }
       );
@@ -106,18 +106,19 @@ router.post(
   
         const payload = {
           user: {
-            id: user.id,
-            role:user.role
+            id: user.id
           }
         };
   
         jwt.sign(
           payload,
-          process.env.JWTCODE,
+          process.env.JWTCODE, {
+            expiresIn: 3600
+        },
           (err, token) => {
             if (err) throw err;
             res.status(200).json({
-              token,role:user.role,username:user.username,id:user.id
+              token
             });
           }
         );

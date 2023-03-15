@@ -6,12 +6,10 @@ var logger = require('morgan');
 const mongoose = require('mongoose')
 var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
-const cors=require('cors')
 var app = express();
 const bodyParser = require("body-parser");
 require('dotenv').config()
 // view engine setup
-app.use(cors())
 app.use(bodyParser.json());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -27,7 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api',userRouter)
-app.use('/api/question', indexRouter);
+app.use('/question', indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

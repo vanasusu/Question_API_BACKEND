@@ -32,7 +32,7 @@ router.post(
       });
       if (user) {
         return res.status(400).json({
-          message: "User Already Exists",
+          msg: "User Already Exists",
         });
       }
 
@@ -50,7 +50,6 @@ router.post(
       const payload = {
         user: {
           id: user.id,
-          role:role
         },
       };
 
@@ -60,7 +59,7 @@ router.post(
         (err, token) => {
           if (err) throw err;
           res.status(200).json({
-            token,username,role,id:user.id
+            token,
           });
         }
       );
@@ -106,18 +105,19 @@ router.post(
   
         const payload = {
           user: {
-            id: user.id,
-            role:user.role
+            id: user.id
           }
         };
   
         jwt.sign(
           payload,
-          process.env.JWTCODE,
+          process.env.JWTCODE, {
+            expiresIn: 3600
+        },
           (err, token) => {
             if (err) throw err;
             res.status(200).json({
-              token,role:user.role,username:user.username,id:user.id
+              token
             });
           }
         );

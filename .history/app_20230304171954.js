@@ -6,12 +6,11 @@ var logger = require('morgan');
 const mongoose = require('mongoose')
 var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
-const cors=require('cors')
+const cors=require()
 var app = express();
 const bodyParser = require("body-parser");
 require('dotenv').config()
 // view engine setup
-app.use(cors())
 app.use(bodyParser.json());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

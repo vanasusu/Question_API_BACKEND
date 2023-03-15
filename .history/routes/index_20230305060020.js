@@ -17,7 +17,7 @@ router.get("/search", auth, async (req, res) => {
   try {
     const filters = req.query;
 
-   var questions = await Question.find({}).populate('user')
+   var questions = await Question.find({}).pop
     if (filters.level) {
      questions= questions.filter(question=>question.level==filters.level)
     //  console.log(questions,filters)

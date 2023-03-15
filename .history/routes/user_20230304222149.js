@@ -50,7 +50,6 @@ router.post(
       const payload = {
         user: {
           id: user.id,
-          role:role
         },
       };
 
@@ -60,7 +59,7 @@ router.post(
         (err, token) => {
           if (err) throw err;
           res.status(200).json({
-            token,username,role,id:user.id
+            token,
           });
         }
       );
@@ -106,8 +105,8 @@ router.post(
   
         const payload = {
           user: {
-            id: user.id,
-            role:user.role
+            id: user.id
+            role:u
           }
         };
   
@@ -117,7 +116,7 @@ router.post(
           (err, token) => {
             if (err) throw err;
             res.status(200).json({
-              token,role:user.role,username:user.username,id:user.id
+              token
             });
           }
         );

@@ -60,7 +60,7 @@ router.post(
         (err, token) => {
           if (err) throw err;
           res.status(200).json({
-            token,username,role,id:user.id
+            token,username,role
           });
         }
       );
@@ -117,7 +117,7 @@ router.post(
           (err, token) => {
             if (err) throw err;
             res.status(200).json({
-              token,role:user.role,username:user.username,id:user.id
+              token,role:user.role,username:
             });
           }
         );
