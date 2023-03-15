@@ -29,9 +29,6 @@ router.get("/search", auth, async (req, res) => {
     if(filters.subject) {
      questions= questions.filter(question=>question.subject==filters.subject)
     }
-    if(filters.question) {
-      questions= questions.filter(question=>question.question==filters.question)
-     }
     return res.status(200).json({ questions })
   } catch (error) {
     console.log(error);

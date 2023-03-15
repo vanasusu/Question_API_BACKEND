@@ -29,9 +29,6 @@ router.get("/search", auth, async (req, res) => {
     if(filters.subject) {
      questions= questions.filter(question=>question.subject==filters.subject)
     }
-    if(filters.question) {
-      questions= questions.filter(question=>question.question==filters.question)
-     }
     return res.status(200).json({ questions })
   } catch (error) {
     console.log(error);
@@ -93,7 +90,7 @@ router.post(
   [
     check("subject", "Please Enter a valid Subject").not().isEmpty(),
     check("topic", "Please enter a valid Topic").not().isEmpty(),
-    check("Question", "Please enter a valid question").not().isEmpty(),
+    check("topic", "Please enter a valid Topic").not().isEmpty(),
     check("level", "Please enter a valid difficulty level").isIn([
       "Easy",
       "Medium",

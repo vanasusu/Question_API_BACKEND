@@ -5,7 +5,7 @@ const QuestionSchema = new mongoose.Schema({
   subject: { required: true, type: String },
   level: {required: true,type: String , enum:['Easy','Medium','Hard']},
   topic: { required: true, type: String },
-  question: { required: true, type: String },
+  topic: { required: true, type: String },
 },{
     timestamps: true
 });
