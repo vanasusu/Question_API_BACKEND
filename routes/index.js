@@ -16,21 +16,23 @@ router.get("/all", auth, async (req, res) => {
 router.get("/search", auth, async (req, res) => {
   try {
     const filters = req.query;
-
-   var questions = await Question.find({}).populate('user')
-    if (filters.level) {
-     questions= questions.filter(question=>question.level==filters.level)
-    //  console.log(questions,filters)
-    } 
-    if(filters.topic) {
-     questions= questions.filter(question=>question.topic==filters.topic)
+    var topic=filters.topic?filters.topic:""
+    var subject=filters.subject?filters.subject:""
+    var question=filters.question?filters.question:""
+    var level= filters.level?filters.level:""
+   var questions = await Question.find({
+    $and:[{
+       topic: new RegExp(`${topic}`,'i')
+    },{
+level: new RegExp(`${level}`,'i')
+    },{
+      question: new RegExp(`${question}`,'i')
+    },{
+      subject: new RegExp(`${subject}`,'i')
     }
-    if(filters.subject) {
-     questions= questions.filter(question=>question.subject==filters.subject)
-    }
-    if(filters.question) {
-      questions= questions.filter(question=>question.question==filters.question)
-     }
+  ]
+   }).populate('user')
+   
     return res.status(200).json({ questions })
   } catch (error) {
     console.log(error);
